@@ -27,10 +27,11 @@ class FileStorage:
 
     def save(self):
         """Serialize __objects to the JSON file __file_path
-            
+
             obj_dict = A dictionary containing all objects in this format:
             <class_name>.id Eg "BaseModel.1234556: {'name': 'First Model'}"
-            results in {"Basemodel.1234556": "{'name': 'first model'}"} before being serialized
+            results in {"Basemodel.1234556": "{'name': 'first model'}"}
+            before being serialized
         """
         dicted = {}
         obj_dict = FileStorage.__objects
@@ -38,7 +39,7 @@ class FileStorage:
             dicted[key] = obj_dict[key].to_dict()
 
         with open(FileStorage.__file_path, "w") as JsonFile:
-            json.dump(dicted, JsonFile) # Serializes dicted & write its content to the JsonFile
+            json.dump(dicted, JsonFile)  # Serializes dicted & write its conten
 
     def reload(self):
         ''' De-serializes the JSON file to __objects if the JSON file
@@ -49,8 +50,8 @@ class FileStorage:
                 obj_dict = json.load(JsonFile)
                 for obj in obj_dict.values():
                     if isinstance(obj, dict) and "__class__" in obj:
-                        cls_name = obj["__class__"] # Extracts the class name
-                        del obj["__class__"] # deletes the class key from the dictionary
-                        self.new(eval(cls_name)(**obj)) # **obj passes the remaining key-value pairs
+                        cls_name = obj["__class__"]  # Extracts the class name
+                        del obj["__class__"]  # deletes the class key
+                        self.new(eval(cls_name)(**obj))
         except FileNotFoundError:
             return
