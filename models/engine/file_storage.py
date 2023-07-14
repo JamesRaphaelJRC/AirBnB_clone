@@ -38,8 +38,9 @@ class FileStorage:
         for key in obj_dict.keys():
             dicted[key] = obj_dict[key].to_dict()
 
-        with open(FileStorage.__file_path, "w") as JsonFile:
-            json.dump(dicted, JsonFile)  # Serializes dicted & write its conten
+        with open(FileStorage.__file_path, "a") as JsonFile:
+            j_str = json.dumps(dicted)  # Serializes dicted & write its conten
+            JsonFile.write(j_str)
 
     def reload(self):
         ''' De-serializes the JSON file to __objects if the JSON file
@@ -47,7 +48,8 @@ class FileStorage:
         '''
         try:
             with open(FileStorage.__file_path) as JsonFile:
-                obj_dict = json.load(JsonFile)
+                j_str = JsonFile.read()
+                obj_dict = json.loads(j_str)
                 for obj in obj_dict.values():
                     if isinstance(obj, dict) and "__class__" in obj:
                         cls_name = obj["__class__"]  # Extracts the class name

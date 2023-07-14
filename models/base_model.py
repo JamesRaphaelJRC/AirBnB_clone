@@ -50,11 +50,8 @@ class BaseModel:
         '''
         dict_rep = []
 
-        if self.name is not None:
-            dict_rep.append(('name', self.name))
-        if self.my_number is not None:
-            dict_rep.append(('my_number', self.my_number))
-
+        dict_rep.append(('name', self.name))
+        dict_rep.append(('my_number', self.my_number))
         others = [('__class__', type(self).__name__), ('id', self.id),
                   ('created_at', self.created_at.isoformat()),
                   ('updated_at', self.updated_at.isoformat())]
