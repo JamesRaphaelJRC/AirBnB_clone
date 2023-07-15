@@ -3,30 +3,58 @@
 import cmd
 from models import storage
 from models.base_model import BaseModel
+from models.user import User
+from models.place import Place
+from models.state import State
+from models.city import City
+from models.amenity import Amenity
+from models.review import Review
 
 
 class HBNBCommand(cmd.Cmd):
     ''' Represents the class HBNBCommand.'''
     prompt = "(hbnb) "
 
+    classes = {
+            "BaseModel",
+            "User",
+            "State",
+            "City",
+            "Place",
+            "Amenity",
+            "Review"
+            }
     new_inst = None
-    classes = ['BaseModel']
-    attributes = ['name', 'my_number']
 
     def do_create(self, line):
         ''' Creates a new instance of BaseModel, saves it (to the JSON file) and
             prints the id.
             usage: create <obj class name>
         '''
-        if not line:
+        arg = line.split()
+        if not arg:
             print("** class name missing **")
-            return
-        if line not in HBNBCommand.classes:
+            return False
+        if arg[0] not in HBNBCommand.classes:
             print("** class doesn't exist **")
-            return
-        HBNBCommand.new_inst = BaseModel()
-        HBNBCommand.new_inst.save()
+            return False
+        if arg[0] == 'BaseModel':
+            HBNBCommand.new_inst = BaseModel()
+        elif arg[0] == 'User':
+            HBNBCommand.new_inst = User()
+        elif arg[0] == 'State':
+            HBNBCommand.new_inst = State()
+        elif arg[0] == 'City':
+            HBNBCommand.new_inst = City()
+        elif arg[0] == 'Place':
+            HBNBCommand.new_inst = Place()
+        elif arg[0] == 'Amenity':
+            HBNBCommand.new_inst = Amenity()
+        elif arg[0] == 'Review':
+            HBNBCommand.new_inst = Review()
+            
         print(HBNBCommand.new_inst.id)
+        storage.save()
 
     def do_show(self, line):
         ''' Prints the string representation of an instance based on the class
@@ -85,17 +113,17 @@ class HBNBCommand(cmd.Cmd):
         obj_dict = storage.all()
         args = line.split()
 
-        if len(args) > 1 or args[0] not in HBNBCommand.classes:
-            print("** class doesn't exist **")
-            return
-        else:
-            obj_list = []
-            for obj in obj_dict.values():
-                if len(args) > 0 and args[0] == obj.__class__.__name__:
-                    obj_list.append(obj.__str__())
-                elif len(args) == 0:
-                    obj_list.append(obj.__str__())
-            print(obj_list)
+        if args:
+            if args[0] not in HBNBCommand.classes or len(args) > 1:
+                print("** class doesn't exist **")
+                return False
+        obj_list = []
+        for obj in obj_dict.values():
+            if len(args) == 1 and args[0] == obj.__class__.__name__:
+                obj_list.append(obj.__str__())
+            elif len(args) == 0:
+                obj_list.append(obj.__str__())
+        print(obj_list)
 
     def do_update(self, line):
         ''' Updates an instance based on the class name and id by adding or
@@ -109,23 +137,24 @@ class HBNBCommand(cmd.Cmd):
 
         if not arg:
             print("** class name missing **")
-            return
+            return False
         if arg[0] not in HBNBCommand.classes:
             print("** class doesn't exist **")
-            return
+            return False
         if len(arg) == 1:
             print("** instance id missing **")
-            return
+            return False
         obj_key = "{}.{}".format(arg[0], arg[1])
         if obj_key not in obj_dict:
             print("** no instance found **")
-            return
+            return False
         if len(arg) == 2:
             print("** attribute name missing **")
-            return
+            return False
         if len(arg) == 3:
             print("** value missing **")
-            return
+            return False
+
         dicta = {}
         for key, value in obj_dict.items():
             if key == obj_key:
