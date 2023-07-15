@@ -155,11 +155,10 @@ class HBNBCommand(cmd.Cmd):
             print("** value missing **")
             return False
 
-        dicta = {}
-        for key, value in obj_dict.items():
-            if key == obj_key:
-                dicta = value.__dict__
-                dicta[arg[2]] = arg[3].replace('"', '')
+        attr_name = arg[2]
+        new_value = arg[3].replace('"', '')
+        setattr(obj_dict[obj_key], attr_name, new_value)
+
         storage.save()
 
     def do_quit(self, line):
@@ -177,3 +176,4 @@ class HBNBCommand(cmd.Cmd):
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
+    storage.load()
