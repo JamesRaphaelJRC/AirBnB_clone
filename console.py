@@ -27,8 +27,8 @@ class HBNBCommand(cmd.Cmd):
     new_inst = None
 
     def do_create(self, line):
-        ''' Creates a new instance of BaseModel, saves it (to the JSON file) and
-            prints the id.
+        ''' Creates a new instance of BaseModel, saves it (to the JSON file)
+            and prints the id.
             usage: create <obj class name>
         '''
         arg = line.split()
@@ -52,7 +52,7 @@ class HBNBCommand(cmd.Cmd):
             HBNBCommand.new_inst = Amenity()
         elif arg[0] == 'Review':
             HBNBCommand.new_inst = Review()
-            
+
         print(HBNBCommand.new_inst.id)
         storage.save()
 
@@ -169,9 +169,11 @@ class HBNBCommand(cmd.Cmd):
     def do_EOF(self, line):
         '''Exits the program cleanly'''
         return True
+
     def emptyline(self):
         '''Does nothing when n empty line + enter is issued'''
         pass
+
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
