@@ -38,7 +38,7 @@ class FileStorage:
         for key in obj_dict.keys():
             dicted[key] = obj_dict[key].to_dict()
 
-        with open(FileStorage.__file_path, "a") as JsonFile:
+        with open(FileStorage.__file_path, "w") as JsonFile:
             j_str = json.dumps(dicted)  # Serializes dicted & write its conten
             JsonFile.write(j_str)
 

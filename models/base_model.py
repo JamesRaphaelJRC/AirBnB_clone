@@ -22,8 +22,6 @@ class BaseModel:
                 elif key == 'updated_at':
                     self.updated_at = datetime.fromisoformat(value)
         else:
-            self.name = None
-            self.my_number = None
             self.id = str(uuid.uuid4())
             self.created_at = datetime.now()
             self.updated_at = datetime.now()
@@ -48,14 +46,8 @@ class BaseModel:
         ''' Returns a dictionary representation of instances of the BaseModel
             class containing only the set instance attributes.
         '''
-        dict_rep = []
-
-        dict_rep.append(('name', self.name))
-        dict_rep.append(('my_number', self.my_number))
-        others = [('__class__', type(self).__name__), ('id', self.id),
-                  ('created_at', self.created_at.isoformat()),
-                  ('updated_at', self.updated_at.isoformat())]
-        for dic in others:
-            dict_rep.append(dic)
-
-        return dict(dict_rep)
+        dict_rep = self.__dict__.copy()
+        dict_rep["__class__"] = type(self).__name__
+        dict_rep["created_at"] = self.created_at.isoformat()
+        dict_rep["updated_at"] = self.updated_at.isoformat()
+        return (dict_rep)
