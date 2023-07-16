@@ -62,4 +62,4 @@ class FileStorage:
                         del obj["__class__"]  # deletes the class key
                         self.new(eval(cls_name)(**obj))
         except FileNotFoundError:
-            return False
+            return

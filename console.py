@@ -157,9 +157,11 @@ class HBNBCommand(cmd.Cmd):
 
         attr_name = arg[2]
         new_value = arg[3].replace('"', '')
-        setattr(obj_dict[obj_key], attr_name, new_value)
 
-        storage.save()
+        obj = obj_dict[obj_key]
+        setattr(obj, attr_name, new_value)
+
+        BaseModel.save(self)
 
     def do_quit(self, line):
         '''Quit command to exit the program'''

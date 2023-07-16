@@ -9,23 +9,20 @@ class BaseModel:
     ''' Represents the BaseModel class '''
     def __init__(self, *args, **kwargs):
         ''' Initializes an instance of the BaseModel class'''
+
+        self.id = str(uuid.uuid4())
+        self.created_at = datetime.now()
+        self.updated_at = datetime.now()
+
         if kwargs and len(kwargs) != 0:
             for key, value in kwargs.items():
-                if key == 'name':
-                    self.name = value
-                elif key == 'my_number':
-                    self.my_number = value
-                elif key == 'id':
-                    self.id = value
-                elif key == 'created_at':
+                if key == 'created_at':
                     self.created_at = datetime.fromisoformat(value)
                 elif key == 'updated_at':
                     self.updated_at = datetime.fromisoformat(value)
+                else:
+                    self.__dict__[key] = value
         else:
-            self.id = str(uuid.uuid4())
-            self.created_at = datetime.now()
-            self.updated_at = datetime.now()
-
             models.storage.new(self)
 
     def save(self):
@@ -38,9 +35,8 @@ class BaseModel:
     def __str__(self):
         ''' Sets and returns the string representation of the class BaseModel
         '''
-        str_rep = '[' + type(self).__name__ + '] (' + self.id + ')'
-        str_rep += str(self.__dict__)
-        return (str_rep)
+        class_name = type(self).__name__
+        return "[{}] ({}) {}".format(class_name, self.id, self.__dict__)
 
     def to_dict(self):
         ''' Returns a dictionary representation of instances of the BaseModel
