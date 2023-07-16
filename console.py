@@ -11,33 +11,6 @@ from models.amenity import Amenity
 from models.review import Review
 
 
-def word_seperator(line):
-    ''' Seperate words into a list where words in double quote are treated as
-        a single element. e.g: 'location "South East"
-                               => ['location', 'South East']
-    '''
-    args = []
-    temp = ""
-    quote_opened = False
-
-    words = line.split()
-
-    for word in words:
-        if word.startswith('"') and not quote_opened:
-            temp = word.lstrip('"')
-            quote_opened = True
-        elif word.endswith('"') and quote_opened:
-            temp += " " + word.rstrip('"')
-            args.append(temp)
-            quote_opened = False
-            temp = ""
-        elif quote_opened:
-            temp += " " + word
-        else:
-            args.append(word)
-    return args
-
-
 class HBNBCommand(cmd.Cmd):
     ''' Represents the class HBNBCommand.'''
     prompt = "(hbnb) "
@@ -159,7 +132,7 @@ class HBNBCommand(cmd.Cmd):
                     <new attribute value>
             Only one attribute can be updated at a time.
         '''
-        arg = word_seperator(line)
+        arg = line.split()
         obj_dict = storage.all()
 
         if not arg:
