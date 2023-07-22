@@ -1,0 +1,19 @@
+:root {
+    /* Font Variables */
+    --globalFontSize: 14px;
+    --globalFontFamily: Circular,"Helvetica Neue",Helvetica,Arial,sans-serif;
+    --globalColor: #484848;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    color: var(--globalColor);
+    font-size: var(--globalFontSize);
+    font-family: var(--globalFontFamily);
+}
+
+body {
+    display: grid;
+    height: 100vh;
+}

@@ -1,0 +1,16 @@
+:root {
+    --borderColor: #CCCCCC;
+}
+
+header {
+    height: 70px;
+    width: 100%;
+    border-bottom: 1px solid var(--borderColor);
+}
+
+header .logo {
+    background: url("../images/logo_hbnb.png") no-repeat center;
+    width: 20%;
+    height: 100%;
+    padding-left: 20px;
+}

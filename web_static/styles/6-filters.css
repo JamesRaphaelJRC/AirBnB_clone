@@ -1,0 +1,82 @@
+:root {
+    /* color variables */
+    --borderColor: #DDDDDD;
+    --btnRed: #FF5A5F;
+    --btnTxt: #FFFFFF;
+    --dropdownBg: #FAFAFA;
+}
+
+.container .filters {
+    display: flex;
+    align-items: center;
+    height: 70px;
+    width: 100%;
+    border: 1px solid var(--borderColor);
+    border-radius: 4px;
+}
+
+.filters > button {
+    font-size: 18px;
+    background-color: var(--btnRed);
+    color: var(--btnTxt);
+    height: 48px;
+    width: 20%;
+    border-radius: 4px;
+    margin-right: 30px;
+    margin-left: auto;
+}
+
+.filters > button:hover {
+    opacity: 90%;
+}
+
+.locations, .amenities {
+    position: relative;
+    height: 100%;
+    width: 25%;
+    display: grid;
+    align-content: center;
+    justify-content: center;
+}
+
+
+.locations {
+    border-right: 1px solid var(--borderColor);
+}
+
+.amenities > h3, .locations > h3 {
+    font-weight: 600; 
+}
+
+.amenities > h4, .locations > h4 {
+    font-weight: 400;
+    font-size: 14px;
+}
+
+.popover {
+    z-index: -5;
+    opacity: 0;
+    display: grid;
+    justify-content: center;
+    row-gap: .5rem;
+    position: absolute;
+    top: 100%;
+    width: 100%;
+    background-color: var(--dropdownBg);
+    border: 1px solid var(--borderColor);
+    border-radius: 4px;
+    padding: 1.5rem;
+}
+
+.filters > div:hover .popover {
+    z-index: 5;
+    opacity: 100;
+    transition: .5s ease opacity;
+}
+
+.popover > h2 {
+    font-size: 16px;
+    display: flex;
+    justify-content: left;
+    width: fit-content;
+}
