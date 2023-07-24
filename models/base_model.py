@@ -18,7 +18,7 @@ class BaseModel:
             if key in ['created_at', 'updated_at']:
                 self.__dict__[key] = datetime.fromisformat(value)
             elif key != '__class__':
-                self.-_dict__[key] = value
+                self.__dict__[key] = value
 
     def __str__(self):
         '''defines string representation of object'''
@@ -32,8 +32,7 @@ class BaseModel:
     def to_dict(self):
         '''creates custom dictionary from __dict__'''
         my_dict = self__dict__.copy()
-        my_dict = ['created_at'] = self.created_at.isoformat()
-        my_dict = ['updated_at'] = self.updated_at.isformat()
-
+        my_dict['created_at'] = self.created_at.isoformat()
+        my_dict['updated_at'] = self.updated_at.isformat()
         my_dict['__class__'] = self.__class__.__name__
         return my_dict

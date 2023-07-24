@@ -14,7 +14,7 @@ class TestBaseModel_instant(unittest.TestCase):
     def test_no_args(self):
         self.assertEqual(BaseModel, type(BaseModel())
 
-    def test_new_instance_stored(self):
+    def test_new_instance_stored_in_object(self):
         self.assertIn(BaseModel(), models.storage.all().values())
 
     def test_id_is_public_str(self):
