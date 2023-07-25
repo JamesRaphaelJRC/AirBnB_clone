@@ -1,0 +1,17 @@
+/*
+ * ===========================
+ * Global Styles
+ * ===========================
+ */
+
+/* Body Styles */
+body {
+	color: #484848;
+	font-family: 14px Circular, "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+/* Container Styles */
+.container {
+	max-width: 1000px;
+	margin: 30px auto;
+}
