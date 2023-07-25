@@ -1,0 +1,61 @@
+/*
+ * ===========================
+ * Filters Class Style
+ * ===========================
+ */
+
+/* Filters style */
+.filters {
+	background-color: #FFFFFF;
+	height: 70px;
+	width: 100%;
+	border: 1px solid #ddd;
+	border-radius: 4px;
+}
+
+/* Search button style */
+.filters button {
+	font-size: 18px;
+	background: #FF5A5F;
+	color: #FFFFFF;
+	height: 48px;
+	width: 20%;
+	border: none;
+	border-radius: 4px;
+	float: right;
+	margin: 12px 30px;
+}
+
+/* Search Button Hover Opacity Style */
+.filters button:hover {
+	background-color: rgba(255, 90, 95, .9);
+}
+
+
+/*
+ * =====================================
+ * Locations and Amenities Styles
+ * =====================================
+ */
+.locations {
+        border-right: 1px solid #DDDDDD;
+        display: inline-block;
+}
+
+.amenities {
+        display: inline-block;
+}
+
+.locations h3,
+.amenities h3 {
+        text-indent: 20%;
+        font-weight: 600;
+}
+
+.locations h4,
+.amenities h4 {
+        text-indent: 20%;
+        font-weight: 400;
+        font-size: 14px;
+}
+
